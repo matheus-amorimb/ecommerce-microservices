@@ -3,7 +3,7 @@ using Catalog.API.Models;
 
 namespace Catalog.API.Products.CreateProduct;
 
-public abstract record CreateProductCommand(string Name, List<string> Category, string Description, string ImageUrl, decimal Price)
+public record CreateProductCommand(string Name, List<string> Category, string Description, string ImageUrl, decimal Price)
     : ICommand<CreateProductResult>;
 public record CreateProductResult(Guid Id);
 
