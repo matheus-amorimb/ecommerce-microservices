@@ -17,7 +17,7 @@ public class DeleteProductHandler(IDocumentSession session, ILogger<DeleteProduc
         var product = await session.LoadAsync<Product>(command.Id, cancellationToken);
         if (product == null)
         {
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException(command.Id);
         }
         session.Delete<Product>(command.Id);
         await session.SaveChangesAsync(cancellationToken);

@@ -1,3 +1,4 @@
+
 namespace Catalog.API.Products.GetProductsByCategory;
 
 public record GetProductsByCategoryQuery(string CategoryName) : IQuery<GetProductsByCategoryResult>;
@@ -11,7 +12,7 @@ internal class GetProductsByCategoryQueryHandler(IDocumentSession session, ILogg
         var products = await session.Query<Product>().Where(product => product.Category.Contains(query.CategoryName)).ToListAsync(cancellationToken);
         if (products.Count == 0)
         {
-            throw new ProductNotFoundException();
+            throw new NotFoundException("Product not found");
         }
         return new GetProductsByCategoryResult(products);
     }
