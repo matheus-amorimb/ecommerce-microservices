@@ -3,7 +3,7 @@ namespace Catalog.API.Products.GetProductById;
 // public record GetProductsByIdRequest(string Id);
 public record GetProductsByIdResponse(Product Product); 
 
-public class GetProductsByIdEndpoint : ICarterModule
+public class GetProductByIdEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {

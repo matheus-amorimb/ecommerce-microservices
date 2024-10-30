@@ -10,6 +10,7 @@ public record UpdateProductRequest(
 
 public record UpdateProductResponse(bool IsSuccess);
 
+
 public class UpdateProductEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

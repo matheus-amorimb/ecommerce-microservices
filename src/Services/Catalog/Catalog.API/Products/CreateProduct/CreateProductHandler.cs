@@ -4,13 +4,23 @@ public record CreateProductCommand(string Name, List<string> Category, string De
     : ICommand<CreateProductResult>;
 public record CreateProductResult(Guid Id);
 
-internal class CreateProductCommandHandler(IDocumentSession session) : ICommandHandler<CreateProductCommand, CreateProductResult>
+public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+{
+    public CreateProductCommandValidator()
+    {
+        RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required");
+        RuleFor(x => x.Category).NotEmpty().WithMessage("Category is required");
+        RuleFor(x => x.ImageUrl).NotEmpty().WithMessage("ImageUrl is required");
+        RuleFor(x => x.Price).GreaterThan(0).WithMessage("Price must be greater than 0");
+    }
+}
+
+internal class CreateProductCommandHandler(IDocumentSession session, ILogger<CreateProductCommandHandler> logger) : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
-        //Business logic to create a product
+        logger.LogInformation("CreateProductCommandHandler.Handle called with {@command}", command);
         
-        //CREATE PRODUCT ENTITY FROM COMMAND OBJECT
         Product product = new Product
         {
             Name = command.Name,
@@ -20,11 +30,9 @@ internal class CreateProductCommandHandler(IDocumentSession session) : ICommandH
             Price = command.Price
         };
         
-        //SAVE TO DATABASE
         session.Store(product);
         await session.SaveChangesAsync(cancellationToken);
         
-        //RETURN CreateProductResult result
         return new CreateProductResult(product.Id);
     }
 }
