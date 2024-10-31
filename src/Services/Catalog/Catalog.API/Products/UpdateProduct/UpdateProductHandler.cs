@@ -14,7 +14,6 @@ public class UpdateProductCommandHandler(IDocumentSession session, ILogger<Updat
 {
     public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
     {
-        logger.LogInformation("UpdateProductCommandHandler.Handle called with {@command}", command);
         var product = await session.LoadAsync<Product>(command.Id, cancellationToken);
         if (product is null)
         {
