@@ -1,0 +1,111 @@
+# Persistent Volume Claim for PostgreSQL data
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pv-claim  # PVC name to request persistent storage for PostgreSQL data
+spec:
+  accessModes:
+    - ReadWriteOnce  # Allows only a single node to mount the volume in read/write mode
+  resources:
+    requests:
+      storage: 10Gi  # Requests 10Gi of storage
+
+---
+# PostgreSQL Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres  # Name of the PostgreSQL deployment
+spec:
+  replicas: 1  # Runs a single instance of PostgreSQL
+  selector:
+    matchLabels:
+      app: postgres  # Labels to identify this app deployment
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:latest  # Image used for PostgreSQL
+          ports:
+            - containerPort: 5432  # Exposes port 5432 (PostgreSQL default port)
+          env:
+            # Environment variables to configure the PostgreSQL database
+            - name: POSTGRES_DB
+              value: "CatalogDb"  # Sets the name of the database
+            - name: POSTGRES_USER
+              value: "postgres"  # Sets the database username
+            - name: POSTGRES_PASSWORD
+              value: "postgres"  # Sets the database password
+          volumeMounts:
+            - mountPath: "/var/lib/postgresql/data"  # Mount path for the persistent volume in the container
+              name: postgres-storage  # Volume name to mount
+      volumes:
+        - name: postgres-storage  # References the persistent volume claim
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim  # Name of the PVC to use for storing PostgreSQL data persistently
+
+---
+# PostgreSQL Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres  # Service name for PostgreSQL
+spec:
+  type: ClusterIP  # Service is only accessible within the cluster
+  selector:
+    app: postgres  # Selects pods with the label 'app: postgres'
+  ports:
+    - port: 5432  # Exposes PostgreSQL on port 5432
+      targetPort: 5432  # Maps to container's port 5432
+
+---
+# Catalog API Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-api  # Name of the deployment for the catalog API
+  labels:
+    app: catalog-api
+spec:
+  replicas: 2  # Sets two instances of the catalog API for high availability
+  selector:
+    matchLabels:
+      app: catalog-api  # Selects the catalog API pods by label
+  template:
+    metadata:
+      labels:
+        app: catalog-api
+    spec:
+      containers:
+        - name: catalog-api
+          image: matheusamorimb/catalog.api:v1  # Custom image for catalog API
+          ports:
+            - containerPort: 8080  # Exposes port 8080 for the API
+          env:
+            # Environment variables for API configuration
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Development"  # Sets environment to Development
+            - name: ConnectionStrings__Database
+              value: "Server=postgres;Port=5432;Database=CatalogDb;User Id=postgres;Password=postgres;Include Error Detail=true"
+              # Database connection string, pointing to the PostgreSQL service within the cluster
+            - name: Kestrel__EndPoints__WebApi__Protocols
+              value: "Http1"  # Sets HTTP protocol to Http1
+            - name: Kestrel__EndPoints__WebApi__Url
+              value: "http://+:8080"  # Configures Kestrel to listen on all network interfaces at port 8080
+
+---
+# Catalog API Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog-api  # Service name for catalog API
+spec:
+  type: LoadBalancer  # Exposes the service externally
+  ports:
+    - port: 8080  # Exposes the service on port 8080
+      targetPort: 8080  # Maps to the catalog API container's port 8080
+  selector:
+    app: catalog-api  # Selects the pods with the label 'app: catalog-api'
