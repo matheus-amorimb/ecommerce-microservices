@@ -25,12 +25,11 @@ builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("Database") ?? string.Empty);
 
 var app = builder.Build();
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+// if (app.Environment.IsDevelopment())
+// { }
+app.UseCors("AllowAnyOrigin");
+app.UseSwagger();
+app.UseSwaggerUI();
 app.MapCarter();
 app.UseExceptionHandler(options => { });
 app.UseHttpsRedirection();
