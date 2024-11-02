@@ -21,7 +21,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t catalog.api:v1 -f ./src/Dockerfile ./src
+          docker build -t catalog.api:v1 -f ./src/Dockerfile .
 
       - name: Push Docker image to Docker Hub
         run: |
