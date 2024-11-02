@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # Trigger on commits to the main branch
+  workflow_dispatch:
 
 jobs:
   build-and-push:
@@ -25,9 +26,9 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./src/Services/Catalog/Catalog.API/Dockerfile # Path to your Dockerfile
+          file: src/Services/Catalog/Catalog.API/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/catalog.api:latest  # Customize this with your desired image name
+          tags: ghcr.io/${{ github.repository_owner }}/catalog.api:v1
 
       - name: Log out of Docker Hub
         run: docker logout ghcr.io
