@@ -21,11 +21,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/catalog.api:v1 .
+          docker build -t catalog.api:v1 -f ./src/Dockerfile ./src
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/catalog.api:v1
+          docker push catalog.api:v1
 
       - name: Log out from Docker Hub
         run: docker logout
