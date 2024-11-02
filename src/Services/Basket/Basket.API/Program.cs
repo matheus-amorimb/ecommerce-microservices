@@ -1,5 +1,3 @@
-using BuildingBlocks.Behaviors;
-
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(Program).Assembly;
 
@@ -10,12 +8,20 @@ builder.Services.AddCarter();
 builder.Services.AddMediatR(configuration =>
 {
     configuration.RegisterServicesFromAssembly(assembly);
-    configuration.AddBehavior(typeof(LoggingBehavior<,>));
-    configuration.AddBehavior(typeof(ValidationBehavior<,>));
+    configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
+    configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
 });
-
+builder.Services
+    .AddMarten(options =>
+        {
+            options.Connection(builder.Configuration.GetConnectionString("Default") ?? string.Empty);
+            options.Schema.For<ShoppingCart>().Identity(cart => cart.Username);
+        }
+    ).UseLightweightSessions();
 var app = builder.Build();
-if (app.Environment.IsDevelopment()) { }
+if (app.Environment.IsDevelopment())
+{
+}
 app.UseSwagger();
 app.UseSwaggerUI();
 app.MapCarter();
