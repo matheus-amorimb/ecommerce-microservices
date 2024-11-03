@@ -22,6 +22,12 @@ services:
       - "5436:5432"
     volumes:
       - postgres_basket:/var/lib/postgresql/data/
+  
+  cache:
+    container_name: redis
+    restart: always
+    ports:
+      - '6379:6379'
 
   catalog.api:
     environment:
