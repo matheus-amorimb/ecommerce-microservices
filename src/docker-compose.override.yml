@@ -65,4 +65,24 @@ services:
     volumes:
       - ~/.microsoft/usersecrets:/home/app/.microsoft/usersecrets:ro
       - ~/.aspnet/https:/home/app/.aspnet/https:ro
+          
+  discount.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+#      - ASPNETCORE_HTTP_PORTS=8080
+#      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__Database=Data Source=discountdb
+#      - Kestrel__EndPoints__WebApi__Protocols=Http1
+#      - Kestrel__EndPoints__WebApi__Url=http://+:8080
+      - Kestrel__EndPoints__Grpc__Protocols=Http2
+      - Kestrel__EndPoints__Grpc__Url=http://+:8080
+    depends_on:
+      - basketdb
+      - cache
+    ports:
+      - "6002:8080"
+      - "6062:8081"
+    volumes:
+      - ~/.microsoft/usersecrets:/home/app/.microsoft/usersecrets:ro
+      - ~/.aspnet/https:/home/app/.aspnet/https:ro
         
