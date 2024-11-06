@@ -193,7 +193,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{83
 		Services\Basket\Basket.API\obj\Debug\net8.0\staticwebassets\msbuild.build.Basket.API.props = Services\Basket\Basket.API\obj\Debug\net8.0\staticwebassets\msbuild.build.Basket.API.props
 		Services\Basket\Basket.API\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Basket.API.props = Services\Basket\Basket.API\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Basket.API.props
 		Services\Basket\Basket.API\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Basket.API.props = Services\Basket\Basket.API\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Basket.API.props
-		Services\Basket\Basket.API\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs = Services\Basket\Basket.API\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+		Services\Basket\Basket.API\obj\Debug\net8.0\.NETCoreApp,Version = v8.0.AssemblyAttributes.cs = Services\Basket\Basket.API\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
 		Services\Basket\Basket.API\obj\Debug\net8.0\Basket.API.MvcApplicationPartsAssemblyInfo.cs = Services\Basket\Basket.API\obj\Debug\net8.0\Basket.API.MvcApplicationPartsAssemblyInfo.cs
 		Services\Basket\Basket.API\obj\Debug\net8.0\Basket.API.csproj.FileListAbsolute.txt = Services\Basket\Basket.API\obj\Debug\net8.0\Basket.API.csproj.FileListAbsolute.txt
 		Services\Basket\Basket.API\obj\Debug\net8.0\apphost = Services\Basket\Basket.API\obj\Debug\net8.0\apphost
@@ -241,6 +241,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discount", "Discount", "{A4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.Grpc", "Services\Discount\Discount.Grpc\Discount.Grpc.csproj", "{FA262A20-B9D4-429E-B9BB-8E3517BD5B4C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ordering", "Ordering", "{E3D9B880-FCA8-432A-BC3B-DCDD9EFF7439}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.API", "Services\Ordering\Ordering.API\Ordering.API.csproj", "{429CE2E3-91DA-4F0C-8FB0-072B6525734D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Domain", "Services\Ordering\Ordering.Domain\Ordering.Domain.csproj", "{8DD138D1-432F-47E2-9637-F148990F3179}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Application", "Services\Ordering\Ordering.Application\Ordering.Application.csproj", "{3B693457-E9E8-4F02-8945-5FFD574605D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Infrastructure", "Services\Ordering\Ordering.Infrastructure\Ordering.Infrastructure.csproj", "{7FE912BA-9076-4D97-868C-9464C8481B2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -254,6 +264,11 @@ Global
 		{A87B2F84-A214-473B-8857-7A8046BCE418} = {940E5BDA-2CD8-40F7-A88C-C5AAA3F2D3B2}
 		{A46A7F10-E447-46DE-8590-51350A243DC0} = {830B7069-5087-4E04-AA9A-CCAC861A133F}
 		{FA262A20-B9D4-429E-B9BB-8E3517BD5B4C} = {A46A7F10-E447-46DE-8590-51350A243DC0}
+		{E3D9B880-FCA8-432A-BC3B-DCDD9EFF7439} = {830B7069-5087-4E04-AA9A-CCAC861A133F}
+		{429CE2E3-91DA-4F0C-8FB0-072B6525734D} = {E3D9B880-FCA8-432A-BC3B-DCDD9EFF7439}
+		{8DD138D1-432F-47E2-9637-F148990F3179} = {E3D9B880-FCA8-432A-BC3B-DCDD9EFF7439}
+		{3B693457-E9E8-4F02-8945-5FFD574605D7} = {E3D9B880-FCA8-432A-BC3B-DCDD9EFF7439}
+		{7FE912BA-9076-4D97-868C-9464C8481B2F} = {E3D9B880-FCA8-432A-BC3B-DCDD9EFF7439}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{275AE04C-A8B7-4369-9682-CF414CAD0E97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -272,5 +287,21 @@ Global
 		{FA262A20-B9D4-429E-B9BB-8E3517BD5B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA262A20-B9D4-429E-B9BB-8E3517BD5B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA262A20-B9D4-429E-B9BB-8E3517BD5B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{429CE2E3-91DA-4F0C-8FB0-072B6525734D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{429CE2E3-91DA-4F0C-8FB0-072B6525734D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{429CE2E3-91DA-4F0C-8FB0-072B6525734D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{429CE2E3-91DA-4F0C-8FB0-072B6525734D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DD138D1-432F-47E2-9637-F148990F3179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DD138D1-432F-47E2-9637-F148990F3179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DD138D1-432F-47E2-9637-F148990F3179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DD138D1-432F-47E2-9637-F148990F3179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B693457-E9E8-4F02-8945-5FFD574605D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B693457-E9E8-4F02-8945-5FFD574605D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B693457-E9E8-4F02-8945-5FFD574605D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B693457-E9E8-4F02-8945-5FFD574605D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FE912BA-9076-4D97-868C-9464C8481B2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FE912BA-9076-4D97-868C-9464C8481B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FE912BA-9076-4D97-868C-9464C8481B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FE912BA-9076-4D97-868C-9464C8481B2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
