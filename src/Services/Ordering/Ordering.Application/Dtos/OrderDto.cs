@@ -5,9 +5,9 @@ namespace Ordering.Application.Dtos;
 public record OrderDto(
     Guid Id, 
     Guid CustomerId, 
-    string OrderName, 
+    string Name, 
     AddressDto ShippingAddress, 
     AddressDto BillingAddress,
     PaymentDto Payment,
-    OrderStatus OrderStatus,
+    OrderStatus Status,
     List<OrderItemDto> OrderItems);
