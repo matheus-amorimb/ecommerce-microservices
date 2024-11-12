@@ -1,3 +1,4 @@
+using Carter;
 using Ordering.Infrastructure.Extensions;
 
 namespace Ordering.API;
@@ -6,6 +7,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApiServices(this IServiceCollection services)
     {
+        services.AddCarter();
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
@@ -14,6 +16,7 @@ public static class DependencyInjection
 
     public static async Task<WebApplication> UseApiServices(this WebApplication app)
     {
+        app.MapCarter();
         app.UseSwaggerUI();
         app.UseSwagger();
         app.UseHttpsRedirection();
