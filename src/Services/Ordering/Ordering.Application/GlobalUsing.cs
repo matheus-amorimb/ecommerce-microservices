@@ -8,3 +8,4 @@ global using Ordering.Domain.ValueObjects;
 global using MediatR;
 global using Ordering.Domain.Events;
 global using Microsoft.EntityFrameworkCore;
+global using BuildingBlocks.Exceptions;
