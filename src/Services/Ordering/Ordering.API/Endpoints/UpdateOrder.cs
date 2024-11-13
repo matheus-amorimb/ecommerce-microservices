@@ -1,7 +1,7 @@
 using Ordering.Application.Order.Commands.UpdateOrder;
 namespace Ordering.API.Endpoints;
 public record UpdateOrderRequest(OrderDto Order);
-public record UpdateOrderResponse(bool IsSuccessful);
+public record UpdateOrderResponse(bool IsSuccess);
 
 public class UpdateOrder : ICarterModule
 {
