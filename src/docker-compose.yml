@@ -8,6 +8,9 @@ services:
   cache:
     image: redis
     
+  messagebroker:
+    image: rabbitmq:management
+    
   orderdb:
     image: mcr.microsoft.com/mssql/server
 
@@ -28,6 +31,12 @@ services:
     build:
       context: .
       dockerfile: Services/Discount/Discount.Grpc/Dockerfile
+  
+  ordering.api:
+    image: ${DOCKER_REGISTRY-}ordering.api
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.API/Dockerfile
 
 volumes:
   postgres_catalog:
