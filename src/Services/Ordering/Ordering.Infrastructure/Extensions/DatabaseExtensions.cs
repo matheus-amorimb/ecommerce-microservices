@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Ordering.Infrastructure.Data.Extensions;
+using Ordering.Infrastructure.Extensions;
 
 namespace Ordering.Infrastructure.Extensions;
 

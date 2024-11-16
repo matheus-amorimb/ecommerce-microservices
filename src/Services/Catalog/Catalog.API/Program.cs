@@ -31,6 +31,5 @@ app.UseSwagger();
 app.UseSwaggerUI();
 app.MapCarter();
 app.UseExceptionHandler(options => { });
-app.UseHttpsRedirection();
 app.UseHealthChecks("/health", new HealthCheckOptions{ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse});
 app.Run();

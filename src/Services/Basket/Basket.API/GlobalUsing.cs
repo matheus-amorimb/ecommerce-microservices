@@ -11,3 +11,6 @@ global using BuildingBlocks.Exceptions;
 global using BuildingBlocks.Exceptions.Handler;
 global using Microsoft.Extensions.Caching.Distributed;
 global using System.Text.Json;
+global using Discount.Grpc;
+global using Grpc.Core;
+global using Basket.API.Dtos;
